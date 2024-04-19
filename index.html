@@ -1,3 +1,24 @@
+
+<!--
+COP3530 Data Structures and Algorithms Final Project
+The Pokemon Team Builder
+
+TEAM:
+Arwen Dowers
+Joanna Mijares
+Sahan Chery
+
+CITATIONS:
+
+HTML and JavaScript tutorials:
+1) CSS FlexBox/ FlexContainer https://www.w3schools.com/css/css3_flexbox.asp
+2) Autocomple List https://stackoverflow.com/questions/7203251/javascript-html-autocomplete-textbox
+3) Datalist for the autocomplete list https://stackoverflow.com/questions/17929356/html-datalist-values-from-array-in-javascript
+
+Personal Projects:
+1) Joanna's Internet Programming Class Assignments 1-6 for general html and javascript syntax
+-->
+
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -17,6 +38,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  text-align: center;
 
 }
 
@@ -37,28 +59,83 @@
 
 <body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
 
-<div class="container; w-100;">
-
-  <div class="jumbotron jumbotron-fluid text-center" style="margin-bottom:0; background-color:#317d9c; color:#d1edf8;">
-  <h1>Pokemon Team Builder</h1>
-  <h3>COP3503C Final Project - Group 33</h3>
+  <div class="jumbotron jumbotron-fluid justify-content-center w-100 text-center" style="display: inline-flex; margin-bottom:0; background-color:#317d9c; color:#d1edf8;">
+    <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;margin-right:20px;">
+    <h1>  </h1>
+    <div>
+    <h1>Pokemon Team Builder</h1>
+    <h3>COP3530 Final Project - Group 33</h3>
   </div>
-</div>
+    <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;margin-left:20px;">
+  </div>
     
 <div class="w-100"style="display: inline-flex">
     
-<div class='w-25'style="background-color:#76b6cf; color:#185e7a;">
+<div class="w-25" style="background-color:#76b6cf; color:#185e7a;padding: 20px;">
     <br>
     <h4 class="text-center">Build your team</h4>
     <br>
+
+    <!--
+    POKEMON NAMES NEED TO COME FROM NAMES LIST ARRAY
+    -->
+    <datalist id="pokemonNameList"></datalist>
+      <script>
+        var pokeNames = ['Pikachu','Tangela', 'Vaporeon'];
+        var pokeList = document.getElementById('pokemonNameList');
+        
+        pokeNames.forEach(function(item){
+          var option = document.createElement('option');
+          option.value = item;
+          pokeList.appendChild(option);
+        });
+      </script>
+
+    <div style="display: inline-flex">
+      <h3>1. </h3>
+      <input type="text" id="pokemonAutocomplete1" list="pokemonNameList" />
+    </div>
+
+    <div style="display: inline-flex">
+      <h3>2. </h3>
+      <input type="text" id="pokemonAutocomplete2" list="pokemonNameList" />
+    </div>
+
+    <div style="display: inline-flex">
+      <h3>3. </h3>
+      <input type="text" id="pokemonAutocomplete3" list="pokemonNameList" />
+    </div>
+
+    <div style="display: inline-flex">
+      <h3>4. </h3>
+      <input type="text" id="pokemonAutocomplete4" list="pokemonNameList" />
+    </div>
+
+    <div style="display: inline-flex">
+      <h3>5. </h3>
+      <input type="text" id="pokemonAutocomplete5" list="pokemonNameList" />
+    </div>
+
+    <div style="display: inline-flex">
+      <h3>6. </h3>
+      <input type="text" id="pokemonAutocomplete6" list="pokemonNameList" />
+      
+    </div>
+<br>
+<br>
+<br>
+<br>
+
 </div>
 
 <div class="flex-container">
     
     <div>
         <br>
-        <h5 class="text-center">Pokemon 1</h5>
+        <h5>Pokemon 1</h5>
         <br>
+        <img src="Images/pokemon.png" alt="A simplistic Pokeball." class="center"style="width:100px;height:100px;">
+
     </div>
 
     <div>
@@ -91,6 +168,10 @@
         <br>
     </div>
 </div>
+
+<br>
+<br>
+<br>
 
 </div>
 
