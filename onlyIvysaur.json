@@ -1,0 +1,39 @@
+[
+    {
+        "name": "ivysaur",
+        "types": "grasspoison",
+        "weaknesses": [
+            "flying",
+            "poison",
+            "bug",
+            "fire",
+            "ice"
+        ],
+        "resistances": [
+            "ground",
+            "water",
+            "grass",
+            "electric"
+        ],
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+    },
+
+    {
+        "name": "bleh",
+        "types": "grasspoison",
+        "weaknesses": [
+            "flying",
+            "poison",
+            "bug",
+            "fire",
+            "ice"
+        ],
+        "resistances": [
+            "ground",
+            "water",
+            "grass",
+            "electric"
+        ],
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+    }
+]
