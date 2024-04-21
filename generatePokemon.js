@@ -1,3 +1,16 @@
+/*
+COP3530 Data Structures and Algorithms Final Project
+The Pokemon Team Builder
+
+TEAM:
+Arwen Dowers
+Joanna Mijares
+Sahan Chery
+
+CITATIONS:
+1) https://medium.com/@sergio13prez/fetching-them-all-poke-api-62ca580981a2
+*/
+
 // holds all normal pokemon (not fusions)
 let allNormalPokemon = [];
 // keeps track of API fetches
