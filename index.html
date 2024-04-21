@@ -14,6 +14,7 @@ HTML and JavaScript tutorials:
 1) CSS FlexBox/ FlexContainer https://www.w3schools.com/css/css3_flexbox.asp
 2) Autocomple List https://stackoverflow.com/questions/7203251/javascript-html-autocomplete-textbox
 3) Datalist for the autocomplete list https://stackoverflow.com/questions/17929356/html-datalist-values-from-array-in-javascript
+4) Centering Button https://www.w3schools.com/howto/howto_css_center_button.asp
 
 Personal Projects:
 1) Joanna's Internet Programming Class Assignments 1-6 for general html and javascript syntax
@@ -31,12 +32,29 @@ Personal Projects:
   <script type="module" src="getPokemonInfo.js"></script>
 
   <script src="getPokemonInfo.js"></script>
+  <script src="unordered_map.js"></script>
+
   <script>
 
-   function hash(){
-      getPokemons();
+   function ordered(){
+      getData();
 
     }
+
+    function unordered(){
+      getData();
+
+    }
+
+    function submit(){
+      var pokemon1 = document.getElementById('pokemonAutocomplete1');
+      console.log(pokeMap[pokemon1.value]);
+
+      if(pokemon1.value == pokeMap[pokemon1.value].name){
+        console.log(pokemon1.value);
+      }
+    }
+
 
   </script>
   <title>Pokemon Team Builder - Group 33: DSA GO!</title>
@@ -59,6 +77,13 @@ Personal Projects:
   color:#185e7a;
   flex: 1;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 </style>
 
 </head>
@@ -74,6 +99,15 @@ Personal Projects:
   </div>
     <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;margin-left:20px;">
   </div>
+
+  <div style="background-color:#0d536e; color:#8ec2d6;padding: 20px;"">
+    <h5 class="text-center">Pick a data structure...</h5>
+  <div class="center" >
+    <input  style="margin: 0;" class='justify-content-center' type='button' value='Ordered Map' onClick='ordered()'>
+    <h5> ⟡ </h5>
+    <input style="margin: 0;" class='justify-content-center' type='button' value='Unordered Map' onClick='unordered()'>
+  </div>
+  </div>
     
 <div class="w-100"style="display: inline-flex">
     
@@ -87,13 +121,24 @@ Personal Projects:
     -->
     <datalist id="pokemonNameList"></datalist>
       <script>
-        var pokeNames = ['Pikachu','Tangela', 'Vaporeon'];
-        var pokeList = document.getElementById('pokemonNameList');
-        
-        pokeNames.forEach(function(item){
-          var option = document.createElement('option');
-          option.value = item;
-          pokeList.appendChild(option);
+        var pokeNamesList = [];
+
+        fetch('./allPokemonData.json')
+        .then((response) => response.json())
+        .then((pokemonNames) => {
+
+          for(let i=0; i < pokemonNames.length; i++){
+            pokeNamesList.push(pokemonNames[i].name);
+          }
+
+          var pokeList = document.getElementById('pokemonNameList');
+
+          for(let i=0; i <= pokeNamesList.length; i++){
+            var option = document.createElement('option');
+            option.value = pokeNamesList[i];
+            pokeList.appendChild(option);
+          };
+
         });
       </script>
 
@@ -141,7 +186,7 @@ Personal Projects:
       <h5 class="text-center">Pokemon 1</h5>
       <p>Insert type</p>
       <br>
-      <img src="Images/pokemon.png" alt="A simplistic Pokeball." class="center"style="width:100px;height:100px;">
+      <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
       <br>
       <br>
       <p><b>Resistances:</b></p>
@@ -155,7 +200,7 @@ Personal Projects:
       <h5 class="text-center">Pokemon 2</h5>
       <p>Insert type</p>
       <br>
-      <img src="Images/pokemon.png" alt="A simplistic Pokeball." class="center"style="width:100px;height:100px;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/110.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
       <br>
       <br>
       <p><b>Resistances:</b></p>
@@ -169,7 +214,7 @@ Personal Projects:
       <h5 class="text-center">Pokemon 3</h5>
       <p>Insert type</p>
       <br>
-      <img src="Images/pokemon.png" alt="A simplistic Pokeball." class="center"style="width:100px;height:100px;">
+      <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
       <br>
       <br>
       <p><b>Resistances:</b></p>
@@ -183,7 +228,7 @@ Personal Projects:
       <h5 class="text-center">Pokemon 4</h5>
       <p>Insert type</p>
       <br>
-      <img src="Images/pokemon.png" alt="A simplistic Pokeball." class="center"style="width:100px;height:100px;">
+      <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
       <br>
       <br>
       <p><b>Resistances:</b></p>
@@ -197,7 +242,7 @@ Personal Projects:
       <h5 class="text-center">Pokemon 5</h5>
       <p>Insert type</p>
       <br>
-      <img src="Images/pokemon.png" alt="A simplistic Pokeball." class="center"style="width:100px;height:100px;">
+      <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
       <br>
       <br>
       <p><b>Resistances:</b></p>
@@ -211,7 +256,7 @@ Personal Projects:
         <h5 class="text-center">Pokemon 6</h5>
         <p>Insert type</p>
         <br>
-        <img src="Images/pokemon.png" alt="A simplistic Pokeball." class="center"style="width:100px;height:100px;">
+        <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
         <br>
         <br>
         <p><b>Resistances:</b></p>
@@ -222,6 +267,7 @@ Personal Projects:
     </div>
 </div>
 
+
 <br>
 <br>
 <br>
@@ -229,7 +275,7 @@ Personal Projects:
 
 </div>
 
-<input class='center' type='button' value='H' onClick='hash()'>
+<input  style="margin: 0;" class='justify-content-center' type='button' value='Submit' onClick='submit()'>
 
 <div class="footer; w-100; text-center" style = "background-color:#317d9c; color:#d1edf8">
 <br class="footer">

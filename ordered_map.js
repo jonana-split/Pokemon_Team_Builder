@@ -4,7 +4,7 @@ const pokeOrdered = [];
 
 function orderedPokemon(){
     try{
-        const pokeJson = fs.readFileSync('allPoekmonData.json', 'utf8');
+        const pokeJson = fs.readFileSync('allPokemonData.json', 'utf8');
         const pokemonData = JSON.parse(pokeJson);
 
         //Add pokemon to ordered map
