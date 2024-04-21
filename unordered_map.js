@@ -1,3 +1,14 @@
+class unorderedPokeMap{
+    constructor() {
+      
+    }
+  
+    insert(key, value) {
+      
+    }
+
+  }
+
 const pokeMap = {}; //create an unordered map as a javascript object
 
 async function getData(){
@@ -13,7 +24,8 @@ async function getData(){
                 name: pokemon.name,
                 type: pokemon.type,
                 weaknesses: pokemon.weaknesses,
-                resistances: pokemon.resistances
+                resistances: pokemon.resistances,
+                sprite: pokemon.sprite
             };
         });
 

@@ -36,24 +36,140 @@ Personal Projects:
 
   <script>
 
+    var isOrder;
+    var isUnordered;
+
+      var pokemon1Answer = $('#pokemon1Answer');
+      var pokemon2Answer = $('#pokemon2Answer');
+      var pokemon3Answer = $('#pokemon3Answer');
+      var pokemon4Answer = $('#pokemon4Answer');
+      var pokemon5Answer = $('#pokemon5Answer');
+      var pokemon6Answer = $('#pokemon6Answer');
+
+      var pokemon1TypeAnswer = $('#pokemon1TypeAnswer');
+      var pokemon2TypeAnswer = $('#pokemon2TypeAnswer');
+      var pokemon3TypeAnswer = $('#pokemon3TypeAnswer');
+      var pokemon4TypeAnswer = $('#pokemon4TypeAnswer');
+      var pokemon5TypeAnswer = $('#pokemon5TypeAnswer');
+      var pokemon6TypeAnswer = $('#pokemon6TypeAnswer');
+
+      var pokemon1SpriteTXT = $('#pokemon1SpriteTXT');
+      var pokemon2SpriteTXT = $('#pokemon2SpriteTXT');
+      var pokemon3SpriteTXT = $('#pokemon3SpriteTXT');
+      var pokemon4SpriteTXT = $('#pokemon4SpriteTXT');
+      var pokemon5SpriteTXT = $('#pokemon5SpriteTXT');
+      var pokemon6SpriteTXT = $('#pokemon6SpriteTXT');
+
+      var error = $('#error');
+
+
    function ordered(){
+      isOrder = true;
+      isUnordered = false;
       getData();
 
     }
 
     function unordered(){
+      isOrder = false;
+      isUnordered = true;
       getData();
 
     }
 
     function submit(){
-      var pokemon1 = document.getElementById('pokemonAutocomplete1');
-      console.log(pokeMap[pokemon1.value]);
+      $('#error').text("Please choose 6 valid Pokemon and select a data structure.");
+      //ordered maps
+      if(isOrder == true && isUnordered == false){
+        var pokemon1 = document.getElementById('pokemonAutocomplete1');
+        var pokemon2 = document.getElementById('pokemonAutocomplete2');
+        var pokemon3 = document.getElementById('pokemonAutocomplete3');
+        var pokemon4 = document.getElementById('pokemonAutocomplete4');
+        var pokemon5 = document.getElementById('pokemonAutocomplete5');
+        var pokemon6 = document.getElementById('pokemonAutocomplete6');
 
-      if(pokemon1.value == pokeMap[pokemon1.value].name){
-        console.log(pokemon1.value);
+        console.log(pokeMap[pokemon1.value]);
+        console.log("meow");
+        console.log(pokeMap[pokemon1.value].type)
+
+        if(pokemon1.value == pokeMap[pokemon1.value].name && pokemon2.value == pokeMap[pokemon2.value].name && pokemon3.value == pokeMap[pokemon3.value].name && pokemon4.value == pokeMap[pokemon4.value].name && pokemon5.value == pokeMap[pokemon5.value].name && pokemon6.value == pokeMap[pokemon6.value].name){
+          $('#error').text("");
+          $('#pokemon1Answer').text(pokemon1.value);
+          $('#pokemon2Answer').text(pokemon2.value);
+          $('#pokemon3Answer').text(pokemon3.value);
+          $('#pokemon4Answer').text(pokemon4.value);
+          $('#pokemon5Answer').text(pokemon5.value);
+          $('#pokemon6Answer').text(pokemon6.value);
+
+          $('#pokemon1TypeAnswer').text(pokeMap[pokemon1.value].type);
+          $('#pokemon2TypeAnswer').text(pokeMap[pokemon2.value].type);
+          $('#pokemon3TypeAnswer').text(pokeMap[pokemon3.value].type);
+          $('#pokemon4TypeAnswer').text(pokeMap[pokemon4.value].type);
+          $('#pokemon5TypeAnswer').text(pokeMap[pokemon5.value].type);
+          $('#pokemon6TypeAnswer').text(pokeMap[pokemon6.value].type);
+
+          $('#pokemon1SpriteTXT').text(pokeMap[pokemon1.value].sprite);
+          $('#pokemon2SpriteTXT').text(pokeMap[pokemon2.value].sprite);
+          $('#pokemon3SpriteTXT').text(pokeMap[pokemon3.value].sprite);
+          $('#pokemon4SpriteTXT').text(pokeMap[pokemon4.value].sprite);
+          $('#pokemon5SpriteTXT').text(pokeMap[pokemon5.value].sprite);
+          $('#pokemon6SpriteTXT').text(pokeMap[pokemon6.value].sprite);
+
+          $("#pokemon1DISPLAY").attr("src", $("#pokemon1SpriteTXT").text());
+          $("#pokemon2DISPLAY").attr("src", $("#pokemon2SpriteTXT").text());
+          $("#pokemon3DISPLAY").attr("src", $("#pokemon3SpriteTXT").text());
+          $("#pokemon4DISPLAY").attr("src", $("#pokemon4SpriteTXT").text());
+          $("#pokemon5DISPLAY").attr("src", $("#pokemon5SpriteTXT").text());
+          $("#pokemon6DISPLAY").attr("src", $("#pokemon6SpriteTXT").text());
+
+
+        }else{
+          $('#error').text("Please choose 6 valid Pokemon and select a data structure.");
+
+        }
+        
+      //unordered maps
+      }else if(isUnordered == true && isOrder == false){
+        var pokemon1 = document.getElementById('pokemonAutocomplete1');
+        console.log(pokeMap[pokemon1.value]);
+        console.log("mrow");
+
+        if(pokemon1.value == pokeMap[pokemon1.value].name && pokemon2.value == pokeMap[pokemon2.value].name && pokemon3.value == pokeMap[pokemon3.value].name && pokemon4.value == pokeMap[pokemon4.value].name && pokemon5.value == pokeMap[pokemon5.value].name && pokemon6.value == pokeMap[pokemon6.value].name){
+          $('#error').text("");
+          $('#pokemon1Answer').text(pokemon1.value);
+          $('#pokemon2Answer').text(pokemon2.value);
+          $('#pokemon3Answer').text(pokemon3.value);
+          $('#pokemon4Answer').text(pokemon4.value);
+          $('#pokemon5Answer').text(pokemon5.value);
+          $('#pokemon6Answer').text(pokemon6.value);
+
+          $('#pokemon1TypeAnswer').text(pokeMap[pokemon1.value].type);
+          $('#pokemon2TypeAnswer').text(pokeMap[pokemon2.value].type);
+          $('#pokemon3TypeAnswer').text(pokeMap[pokemon3.value].type);
+          $('#pokemon4TypeAnswer').text(pokeMap[pokemon4.value].type);
+          $('#pokemon5TypeAnswer').text(pokeMap[pokemon5.value].type);
+          $('#pokemon6TypeAnswer').text(pokeMap[pokemon6.value].type);
+
+          $('#pokemon1SpriteTXT').text(pokeMap[pokemon1.value].sprite);
+          $('#pokemon2SpriteTXT').text(pokeMap[pokemon2.value].sprite);
+          $('#pokemon3SpriteTXT').text(pokeMap[pokemon3.value].sprite);
+          $('#pokemon4SpriteTXT').text(pokeMap[pokemon4.value].sprite);
+          $('#pokemon5SpriteTXT').text(pokeMap[pokemon5.value].sprite);
+          $('#pokemon6SpriteTXT').text(pokeMap[pokemon6.value].sprite);
+
+          $("#pokemon1DISPLAY").attr("src", $("#pokemon1SpriteTXT").text());
+          $("#pokemon2DISPLAY").attr("src", $("#pokemon2SpriteTXT").text());
+          $("#pokemon3DISPLAY").attr("src", $("#pokemon3SpriteTXT").text());
+          $("#pokemon4DISPLAY").attr("src", $("#pokemon4SpriteTXT").text());
+          $("#pokemon5DISPLAY").attr("src", $("#pokemon5SpriteTXT").text());
+          $("#pokemon6DISPLAY").attr("src", $("#pokemon6SpriteTXT").text());
+        }
+      else{
+        $('#error').text("Please choose 6 valid Pokemon and select a data structure.");
       }
+      
     }
+  }
 
 
   </script>
@@ -172,9 +288,15 @@ Personal Projects:
       <input type="text" id="pokemonAutocomplete6" list="pokemonNameList" />
       
     </div>
+
 <br>
 <br>
-<br>
+<div class="center" >
+  <input  style="margin: 0;" class='justify-content-center' type='button' value='Submit' onClick='submit()'>
+</div>
+
+<p><span style= "text-align: center;color:rgb(242, 245, 143)" id='error'></span></p>
+
 <br>
 
 </div>
@@ -183,25 +305,10 @@ Personal Projects:
     
     <div>
       <br>
-      <h5 class="text-center">Pokemon 1</h5>
-      <p>Insert type</p>
-      <br>
-      <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
-      <br>
-      <br>
-      <p><b>Resistances:</b></p>
-      <br>
-      <p><b>Weaknesses:</b></p>
-      <br>
-    </div>
-
-    <div>
-      <br>
-      <h5 class="text-center">Pokemon 2</h5>
-      <p>Insert type</p>
-      <br>
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/110.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
-      <br>
+      <h5><span id='pokemon1Answer'>Pokemon 1</span></h5>
+      <p><span id='pokemon1TypeAnswer'>Type</span></p>
+      <span hidden="hidden" id="pokemon1SpriteTXT"></span>
+      <img id="pokemon1DISPLAY" style="width:150px;height:150px;border:#76b6cf">
       <br>
       <p><b>Resistances:</b></p>
       <br>
@@ -211,25 +318,10 @@ Personal Projects:
 
     <div>
       <br>
-      <h5 class="text-center">Pokemon 3</h5>
-      <p>Insert type</p>
-      <br>
-      <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
-      <br>
-      <br>
-      <p><b>Resistances:</b></p>
-      <br>
-      <p><b>Weaknesses:</b></p>
-      <br>
-    </div>
-
-    <div>
-      <br>
-      <h5 class="text-center">Pokemon 4</h5>
-      <p>Insert type</p>
-      <br>
-      <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
-      <br>
+      <h5><span id='pokemon2Answer'>Pokemon 2</span></h5>
+      <p><span id='pokemon2TypeAnswer'>Type</span></p>
+      <span hidden="hidden" id="pokemon2SpriteTXT"></span>
+      <img id="pokemon2DISPLAY" style="width:150px;height:150px;border:#76b6cf">
       <br>
       <p><b>Resistances:</b></p>
       <br>
@@ -239,11 +331,36 @@ Personal Projects:
 
     <div>
       <br>
-      <h5 class="text-center">Pokemon 5</h5>
-      <p>Insert type</p>
+      <h5><span id='pokemon3Answer'>Pokemon 3</span></h5>
+      <p><span id='pokemon3TypeAnswer'>Type</span></p>
+      <span hidden="hidden" id="pokemon3SpriteTXT"></span>
+      <img id="pokemon3DISPLAY" style="width:150px;height:150px;border:#76b6cf">
       <br>
-      <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
+      <p><b>Resistances:</b></p>
       <br>
+      <p><b>Weaknesses:</b></p>
+      <br>
+    </div>
+
+    <div>
+      <br>
+      <h5><span id='pokemon4Answer'>Pokemon 4</span></h5>
+      <p><span id='pokemon4TypeAnswer'>Type</span></p>
+      <span hidden="hidden" id="pokemon4SpriteTXT"></span>
+      <img id="pokemon4DISPLAY" style="width:150px;height:150px;border:#76b6cf">
+      <br>
+      <p><b>Resistances:</b></p>
+      <br>
+      <p><b>Weaknesses:</b></p>
+      <br>
+    </div>
+
+    <div>
+      <br>
+      <h5><span id='pokemon5Answer'>Pokemon 5</span></h5>
+      <p><span id='pokemon5TypeAnswer'>Type</span></p>
+      <span hidden="hidden" id="pokemon5SpriteTXT"></span>
+      <img id="pokemon5DISPLAY" style="width:150px;height:150px;border:#76b6cf">
       <br>
       <p><b>Resistances:</b></p>
       <br>
@@ -253,11 +370,10 @@ Personal Projects:
 
     <div>
         <br>
-        <h5 class="text-center">Pokemon 6</h5>
-        <p>Insert type</p>
-        <br>
-        <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;">
-        <br>
+        <h5><span id='pokemon6Answer'>Pokemon 6</span></h5>
+        <p><span id='pokemon6TypeAnswer'>Type</span></p>
+        <span hidden="hidden" id="pokemon6SpriteTXT"></span>
+      <img id="pokemon6DISPLAY" style="width:150px;height:150px;border:#76b6cf">
         <br>
         <p><b>Resistances:</b></p>
       <br>
@@ -268,14 +384,13 @@ Personal Projects:
 </div>
 
 
+
 <br>
 <br>
 <br>
 
 
 </div>
-
-<input  style="margin: 0;" class='justify-content-center' type='button' value='Submit' onClick='submit()'>
 
 <div class="footer; w-100; text-center" style = "background-color:#317d9c; color:#d1edf8">
 <br class="footer">
