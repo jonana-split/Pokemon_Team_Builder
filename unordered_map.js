@@ -2,7 +2,7 @@ const pokeMap = {}; //create an unordered map as a javascript object
 
 async function getData(){
     try{
-        const pokeJson = await fetch('onlyIvysaur.json');
+        const pokeJson = await fetch('allPokemonData.json');
         if (!pokeJson.ok){
             throw new Error('Cannot capture pokemon');
         }
@@ -29,7 +29,7 @@ async function weakAndstr(){
             const poke = pokeMap[pokeName];
             const pokeType = poke.type;
 
-            const pokeRes = await fetch('onlyIvysaur.json');
+            const pokeRes = await fetch('allPokemonData.json');
             if (!pokeRes.ok){
                 throw new Error('Could not catch pokemon');
             }
