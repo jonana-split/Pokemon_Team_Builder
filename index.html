@@ -1,4 +1,3 @@
-
 <!--
 COP3530 Data Structures and Algorithms Final Project
 The Pokemon Team Builder
@@ -101,10 +100,11 @@ Personal Projects:
 
       let sortedNamesList = await getSortedData();
       let end = performance.now();
-      let duration = end - start;
+      let duration = (end - start).toFixed(2);
 
       $('#dataStructure').text("Ordered Map");
-      $('#performance-getdata').text("Duration: " + duration);
+
+      $('#performance-getdata').text("Duration: " + duration + " ms");
 
       console.log("ordered function complete");
       setPokeList(sortedNamesList);
@@ -118,11 +118,11 @@ Personal Projects:
 
       let namesList = await getData();
       let end = performance.now();
-      let duration = end - start;
+      let duration = (end - start).toFixed(2);
 
 
       $('#dataStructure').text("Unordered Map");
-      $('#performance-getdata').text("Duration: " + duration);
+      $('#performance-getdata').text("Duration: " + duration + " ms");
 
       console.log("unordered function complete");
       setPokeList(namesList);
@@ -306,15 +306,20 @@ Personal Projects:
   </div>
 
   <div style="background-color:#0d536e; color:#8ec2d6;padding: 20px;"">
-    <h5 class="text-center">Pick a data structure...</h5>
+    <h5 style = "padding-top: 20px;" class="text-center">Pick a data structure...</h5>
   <div class="center" >
     <input  style="margin: 0;" class='justify-content-center' type='button' value='Ordered Map' onClick='ordered()'>
     <h5> ⟡ </h5>
     <input style="margin: 0;" class='justify-content-center' type='button' value='Unordered Map' onClick='unordered()'>
-    <span id="performance-getdata"></span>
+    
+
   </div>
-  <p class="text-center" style="color:#d1edf8; padding-top: 20px;"><span id="dataStructure"></span></p>
-  </div>
+  <p class="text-center" style="color:#d1edf8; padding-top: 20px;">
+  <b><span id="dataStructure"></span></b>
+  <br>
+  <span class="align-self: left" id="performance-getdata"></span></p>
+  
+</div>
     
 <div class="w-100"style="display: inline-flex">
     
