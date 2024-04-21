@@ -1,3 +1,10 @@
+//CITATIONS:
+
+//Hash Maps
+//https://www.freecodecamp.org/news/javascript-hash-table-associative-array-hashing-in-js/
+//https://www.educative.io/blog/data-strucutres-hash-table-javascript#implement
+//https://www.youtube.com/watch?v=y3CcHKEM8r8
+
 //unordered map using hash map as backing data structure
 class unorderedPokeMap{
     constructor() {
