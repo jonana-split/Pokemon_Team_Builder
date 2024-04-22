@@ -1,15 +1,21 @@
 class orderedPokeMap{
     constructor() {
-      
+        this.orderedMap = {};
     }
   
     insert(key, value) {
-      
+        this.orderedMap[key] = value;
+    }
+
+    get(key) {
+        return this.orderedMap[key];
+    }
+
+    getAllNames() {
+        return Object.keys(this.orderedMap);
     }
 
   }
-
-const pokeOrderedMap = {}; //create an ordered map as a javascript object
 
 function comparePokemon(a,b){
     if(a.name < b.name) {
@@ -21,7 +27,10 @@ function comparePokemon(a,b){
     return 0;
 }
 
+let pokeOrderedMap = new orderedPokeMap();
+
 async function getSortedData(){
+    pokeOrderedMap = new orderedPokeMap();
     try{
         const pokeJson = await fetch('allPokemonData.json');
         if (!pokeJson.ok){
@@ -31,13 +40,14 @@ async function getSortedData(){
         pokeData.sort(comparePokemon);
         //Gets pokemon data from JSON
         pokeData.forEach(pokemon => {
-            pokeOrderedMap[pokemon.name] = {
+            pokeOrderedMap.insert(pokemon.name, {
                 name: pokemon.name,
                 type: pokemon.type,
                 weaknesses: pokemon.weaknesses,
                 resistances: pokemon.resistances,
                 sprite: pokemon.sprite
-            };
+            }
+            );
         });
 
         console.log(pokeOrderedMap); //Prints the map
@@ -45,7 +55,7 @@ async function getSortedData(){
         console.error(error);
     }
     console.log("getSortedData completed");
-    return Object.keys(pokeOrderedMap);
+    return pokeOrderedMap.getAllNames();
 }
 
 /*function orderedPokemon(){
@@ -71,7 +81,7 @@ async function getSortedData(){
 
 orderedPokemon();*/
 
-async function weakAndstr(){
+/*async function weakAndstr(){
     try{
         for (const pokeName in pokeMap){
             const poke = pokeMap[pokeName];
@@ -96,7 +106,7 @@ async function weakAndstr(){
     } catch (error){
         console.error(error);
     }
-}
+}*/
 
 
-getSortedData(); //Calls function to get and read data from the JSON file
+//getSortedData(); //Calls function to get and read data from the JSON file
