@@ -59,6 +59,8 @@ class unorderedPokeMap{
 
 let pokeMap = new unorderedPokeMap(); //create an unordered map as a javascript object
 
+
+//getData(); //Calls function to get and read data from the JSON file
 async function getData(){
     pokeMap = new unorderedPokeMap();
     try{
@@ -86,33 +88,3 @@ async function getData(){
     console.log("getData completed");
     return pokeMap.getAllNames();
 }
-
-async function weakAndstr(){
-    try{
-        for (const pokeName in pokeMap){
-            const poke = pokeMap[pokeName];
-            const pokeType = poke.type;
-
-            const pokeRes = await fetch('allPokemonData.json');
-            if (!pokeRes.ok){
-                throw new Error('Could not catch pokemon');
-            }
-
-            const pokeData = await pokeRes.json();
-            const pokeDamage = pokeData.poke_damage;
-            //Updates weaknesses and resistances based on damage relations
-            pokeDamage.double_damage_from.forEach(weakness =>{
-                pokemon.weaknesses.push(weakness.name);
-            });
-            pokeDamage.half_damage_from.forEach(resistance => {
-                pokemon.resistances.push(resistance.name);
-            });
-        }
-        console.log(pokeMap); //prints unordered map
-    } catch (error){
-        console.error(error);
-    }
-}
-
-
-//getData(); //Calls function to get and read data from the JSON file

@@ -1,0 +1,296 @@
+//CITATIONS:
+
+//Implementing RedBlack trees in JavaScript
+//Class Slides 96-146 4 - Balanced Trees.pdf
+//https://www.sahinarslan.tech/posts/deep-dive-into-data-structures-using-javascript-red-black-tree
+//https://www.youtube.com/watch?v=IDqdf7VicDs
+//https://dev.to/igorok/javascript-red-black-tree-4703
+//https://www.programiz.com/dsa/red-black-tree
+//https://mgechev.github.io/javascript-algorithms/data-structures_red-black-tree.js.html
+//https://github.com/liubinyi/red-black-tree-js/blob/master/src/createNode.js
+//https://www.growingwiththeweb.com/data-structures/red-black-tree/overview/
+
+const colors = {
+    RED: 'RED',
+    BLACK: 'BLACK'
+};
+
+class Node {
+    constructor(key, value, color = colors.RED) { 
+        this.color = color;
+        this.left = null;
+        this.right = null;
+        this.parent = null;
+        this.key = key;
+        this.value = value;
+
+    }
+}
+
+class orderedPokeMap {
+    constructor() {
+        //this.orderedPokeMap = [];
+        this.root = null;
+    }
+
+    insert(key, value){
+        
+        let node = new Node(key, value, colors.RED);
+        let curr = this.root;
+        let temp = none;
+
+        if(this.root == null){
+            this.root = node;
+            node.color = colors.BLACK;
+            node.parent = null;
+        }else{
+            while(curr != null){
+                temp = curr;
+    
+                if(node.key < curr.key){
+                    curr = curr.left;
+                }else{
+                    curr = curr.right;
+                }
+            }
+        }
+
+        node.parent = temp;
+
+        if(node.key < temp.key){
+            temp.left = node;
+        }else{
+            temp.right = node;
+        }
+
+            let nodeLeft = new Node(null, null, colors.RED);
+            nodeLeft.color = colors.BLACK;
+            nodeLeft.parent = node;
+            node.left = nodeLeft;
+
+            let nodeRight = new Node(null, null, colors.RED);
+            nodeRight.color = colors.BLACK;
+            nodeRight.parent = node;
+            node.left = nodeRight;
+
+
+        this.fixTree(node);
+
+    }
+
+
+    fixTree(node) {
+
+        if(node.parent == null){
+            node.color = colors.BLACK;
+        }
+        /*if(node.parent.color == colors.BLACK){
+            return;
+        }*/
+
+
+        let parent = node.parent;
+
+        var grandparent = new Node();
+
+        if(node.parent != null && node != null){
+            grandparent = node.parent.parent;
+        }else{
+            grandparent = null;
+        }
+
+        var uncle = new Node();
+        if(grandparent && node.parent == grandparent.left){
+            uncle = grandparent.right;
+        }else if(grandparent && node.parent == grandparent.right){
+            uncle = grandparent.left;
+        }
+        
+        if(parent != null){
+        if(uncle != null && uncle.color == colors.RED){
+            parent.color = uncle.color = colors.BLACK;
+            grandparent.color = colors.RED;
+            this.fixTree(grandparent);
+            return;
+        }
+        if(node == parent.right && parent == grandparent.left){
+            this.rotateLeft(parent);
+            node = parent;
+            parent = node.parent;
+        }else if(node == parent.left && parent == grandparent.right){
+            this.rotateRight(parent);
+            node = parent;
+            parent = node.parent;
+        }
+
+        parent.color = colors.BLACK;
+        grandparent.color = colors.RED;
+    
+        if(node == parent.left){
+            this.rotateRight(grandparent);
+        }else{
+            this.rotateLeft(grandparent);
+        }
+    }
+    }
+
+    rotateLeft(node) {
+      
+        const current = node.right;
+
+        node.right = current.left;
+        current.left = node;
+
+        if(current.left != null){
+            current.left.parent = node;
+        }
+
+        current.parent = node.parent;
+
+        //replace parent (node, current)
+        if(!node.parent){
+            this.root = current;
+        }else if(node == node.parent.left){
+            node.parent.left = current;
+        }else{
+            node.parent.right = current;
+        }
+
+        current.left = node;
+
+        node.parent = current;
+
+    }
+
+    rotateRight(node) {
+         
+        const current = node.left;
+
+        node.left = current.right;
+        current.right = node;
+
+        if(current.right != null){
+            current.right.parent = node;
+        }
+
+        current.parent = node.parent;
+
+        //replace parent (node, current)
+        if(!node.parent){
+            this.root = current;
+        }else if(node == node.parent.right){
+            node.parent.right = current;
+        }else{
+            node.parent.left = current;
+        }
+
+        current.right = node;
+
+        node.parent = current;
+
+    }
+
+    get(key) {
+        let node = this.root;
+        if(key<node.key){
+            node = this.root.left;
+        }
+        if(key>node.key){
+            node = this.root.right;
+        }
+
+        if(node == null || key == node.key){
+            return orderedPokeMap[node.key];
+        }
+
+        return;
+    }
+
+    inorder(node, allNames){
+        if(node == null){
+            return;
+        }
+
+        this.inorder(node.left, allNames);
+        allNames.push(node.key);
+        console.log("Node key:", node.key);
+        this.inorder(node.right, allNames);
+
+    }
+
+    getAllNames(){
+        
+        let allNames = [];
+
+       this.inorder(this.root, allNames);
+
+        //allNames.push("meow");
+
+        console.log("Names:", allNames);
+
+        return allNames;
+
+    }
+
+}
+
+/*
+class orderedPokeMap{
+    constructor() {
+        this.orderedMap = {};
+    }
+  
+    insert(key, value) {
+        this.orderedMap[key] = value;
+    }
+
+    get(key) {
+        return this.orderedMap[key];
+    }
+
+    getAllNames() {
+        return Object.keys(this.orderedMap);
+    }
+
+  }
+*/
+function comparePokemon(a,b){
+    if(a.name < b.name) {
+        return -1;
+    }
+    if(a.name > b.name) {
+        return 1;
+    }
+    return 0;
+}
+
+let pokeOrderedMap = new orderedPokeMap();
+
+async function getSortedData(){
+    pokeOrderedMap = new orderedPokeMap();
+    try{
+        const pokeJson = await fetch('allPokemonData.json');
+        if (!pokeJson.ok){
+            throw new Error('Cannot capture pokemon');
+        }
+        const pokeData = await pokeJson.json();
+        pokeData.sort(comparePokemon);
+        //Gets pokemon data from JSON
+        pokeData.forEach(pokemon => {
+            pokeOrderedMap.insert(pokemon.name, {
+                name: pokemon.name,
+                type: pokemon.type,
+                weaknesses: pokemon.weaknesses,
+                resistances: pokemon.resistances,
+                sprite: pokemon.sprite
+            }
+            );
+        });
+
+        console.log(pokeOrderedMap); //Prints the map
+    } catch (error){
+        console.error(error);
+    }
+    console.log("getSortedData completed");
+    return pokeOrderedMap.getAllNames();
+}

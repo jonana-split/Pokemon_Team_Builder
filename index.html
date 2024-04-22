@@ -131,6 +131,7 @@ Personal Projects:
 
     function submit(){
       $('#error').text("Please choose 6 valid Pokemon and select a data structure.");
+      
       //ordered maps
       if(isOrder == true && isUnordered == false){
         var pokemon1 = document.getElementById('pokemonAutocomplete1');
@@ -140,11 +141,11 @@ Personal Projects:
         var pokemon5 = document.getElementById('pokemonAutocomplete5');
         var pokemon6 = document.getElementById('pokemonAutocomplete6');
 
-        console.log(pokeOrderedMap.get(pokemon1.value));
+        console.log(pokeMap[pokemon1.value]);
         console.log("meow");
-        console.log(pokeOrderedMap.get(pokemon1.value).type);
+        console.log(pokeMap[pokemon1.value].type)
 
-        if(pokemon1.value == pokeOrderedMap.get(pokemon1.value).name && pokemon2.value == pokeOrderedMap.get(pokemon2.value).name && pokemon3.value == pokeOrderedMap.get(pokemon3.value).name && pokemon4.value == pokeOrderedMap.get(pokemon4.value).name && pokemon5.value == pokeOrderedMap.get(pokemon5.value).name && pokemon6.value == pokeOrderedMap.get(pokemon6.value).name){
+        if(pokemon1.value == pokeMap[pokemon1.value].name && pokemon2.value == pokeMap[pokemon2.value].name && pokemon3.value == pokeMap[pokemon3.value].name && pokemon4.value == pokeMap[pokemon4.value].name && pokemon5.value == pokeMap[pokemon5.value].name && pokemon6.value == pokeMap[pokemon6.value].name){
           $('#error').text("");
           $('#pokemon1Answer').text(pokemon1.value);
           $('#pokemon2Answer').text(pokemon2.value);
@@ -153,19 +154,19 @@ Personal Projects:
           $('#pokemon5Answer').text(pokemon5.value);
           $('#pokemon6Answer').text(pokemon6.value);
 
-          $('#pokemon1TypeAnswer').text(pokeOrderedMap.get(pokemon1.value).type);
-          $('#pokemon2TypeAnswer').text(pokeOrderedMap.get(pokemon2.value).type);
-          $('#pokemon3TypeAnswer').text(pokeOrderedMap.get(pokemon3.value).type);
-          $('#pokemon4TypeAnswer').text(pokeOrderedMap.get(pokemon4.value).type);
-          $('#pokemon5TypeAnswer').text(pokeOrderedMap.get(pokemon5.value).type);
-          $('#pokemon6TypeAnswer').text(pokeOrderedMap.get(pokemon6.value).type);
+          $('#pokemon1TypeAnswer').text(pokeMap[pokemon1.value].type);
+          $('#pokemon2TypeAnswer').text(pokeMap[pokemon2.value].type);
+          $('#pokemon3TypeAnswer').text(pokeMap[pokemon3.value].type);
+          $('#pokemon4TypeAnswer').text(pokeMap[pokemon4.value].type);
+          $('#pokemon5TypeAnswer').text(pokeMap[pokemon5.value].type);
+          $('#pokemon6TypeAnswer').text(pokeMap[pokemon6.value].type);
 
-          $('#pokemon1SpriteTXT').text(pokeOrderedMap.get(pokemon1.value).sprite);
-          $('#pokemon2SpriteTXT').text(pokeOrderedMap.get(pokemon2.value).sprite);
-          $('#pokemon3SpriteTXT').text(pokeOrderedMap.get(pokemon3.value).sprite);
-          $('#pokemon4SpriteTXT').text(pokeOrderedMap.get(pokemon4.value).sprite);
-          $('#pokemon5SpriteTXT').text(pokeOrderedMap.get(pokemon5.value).sprite);
-          $('#pokemon6SpriteTXT').text(pokeOrderedMap.get(pokemon6.value).sprite);
+          $('#pokemon1SpriteTXT').text(pokeMap[pokemon1.value].sprite);
+          $('#pokemon2SpriteTXT').text(pokeMap[pokemon2.value].sprite);
+          $('#pokemon3SpriteTXT').text(pokeMap[pokemon3.value].sprite);
+          $('#pokemon4SpriteTXT').text(pokeMap[pokemon4.value].sprite);
+          $('#pokemon5SpriteTXT').text(pokeMap[pokemon5.value].sprite);
+          $('#pokemon6SpriteTXT').text(pokeMap[pokemon6.value].sprite);
 
           $("#pokemon1DISPLAY").attr("src", $("#pokemon1SpriteTXT").text());
           $("#pokemon2DISPLAY").attr("src", $("#pokemon2SpriteTXT").text());
@@ -174,19 +175,19 @@ Personal Projects:
           $("#pokemon5DISPLAY").attr("src", $("#pokemon5SpriteTXT").text());
           $("#pokemon6DISPLAY").attr("src", $("#pokemon6SpriteTXT").text());
 
-          $('#pokemon1Res').text(pokeOrderedMap.get(pokemon1.value).resistances.join(", "));
-          $('#pokemon2Res').text(pokeOrderedMap.get(pokemon2.value).resistances.join(", "));
-          $('#pokemon3Res').text(pokeOrderedMap.get(pokemon3.value).resistances.join(", "));
-          $('#pokemon4Res').text(pokeOrderedMap.get(pokemon4.value).resistances.join(", "));
-          $('#pokemon5Res').text(pokeOrderedMap.get(pokemon5.value).resistances.join(", "));
-          $('#pokemon6Res').text(pokeOrderedMap.get(pokemon6.value).resistances.join(", "));
+          $('#pokemon1Res').text(pokeMap[pokemon1.value].resistances.join(", "));
+          $('#pokemon2Res').text(pokeMap[pokemon2.value].resistances.join(", "));
+          $('#pokemon3Res').text(pokeMap[pokemon3.value].resistances.join(", "));
+          $('#pokemon4Res').text(pokeMap[pokemon4.value].resistances.join(", "));
+          $('#pokemon5Res').text(pokeMap[pokemon5.value].resistances.join(", "));
+          $('#pokemon6Res').text(pokeMap[pokemon6.value].resistances.join(", "));
 
-          $('#pokemon1Weak').text(pokeOrderedMap.get(pokemon1.value).weaknesses.join(", "));
-          $('#pokemon2Weak').text(pokeOrderedMap.get(pokemon2.value).weaknesses.join(", "));
-          $('#pokemon3Weak').text(pokeOrderedMap.get(pokemon3.value).weaknesses.join(", "));
-          $('#pokemon4Weak').text(pokeOrderedMap.get(pokemon4.value).weaknesses.join(", "));
-          $('#pokemon5Weak').text(pokeOrderedMap.get(pokemon5.value).weaknesses.join(", "));
-          $('#pokemon6Weak').text(pokeOrderedMap.get(pokemon6.value).weaknesses.join(", "));
+          $('#pokemon1Weak').text(pokeMap[pokemon1.value].weaknesses.join(", "));
+          $('#pokemon2Weak').text(pokeMap[pokemon2.value].weaknesses.join(", "));
+          $('#pokemon3Weak').text(pokeMap[pokemon3.value].weaknesses.join(", "));
+          $('#pokemon4Weak').text(pokeMap[pokemon4.value].weaknesses.join(", "));
+          $('#pokemon5Weak').text(pokeMap[pokemon5.value].weaknesses.join(", "));
+          $('#pokemon6Weak').text(pokeMap[pokemon6.value].weaknesses.join(", "));
 
 
         }else{
@@ -335,7 +336,7 @@ Personal Projects:
       <script>
         var pokeNamesList = [];
 
-        /* fetch('./allPokemonData.json')
+        fetch('./allPokemonData.json')
         .then((response) => response.json())
         .then((pokemonNames) => {
 
@@ -345,7 +346,7 @@ Personal Projects:
 
           setPokeList(pokeNamesList);
 
-        }); */
+        });
 
         function setPokeList(pokeNamesList) {
           var pokeList = document.getElementById('pokemonNameList');
@@ -361,32 +362,32 @@ Personal Projects:
 
     <div style="display: inline-flex">
       <h3>1. </h3>
-      <input type="text" id="pokemonAutocomplete1" list="pokemonNameList" autocomplete = "off"/>
+      <input type="text" id="pokemonAutocomplete1" list="pokemonNameList" />
     </div>
 
     <div style="display: inline-flex">
       <h3>2. </h3>
-      <input type="text" id="pokemonAutocomplete2" list="pokemonNameList" autocomplete = "off"/>
+      <input type="text" id="pokemonAutocomplete2" list="pokemonNameList" />
     </div>
 
     <div style="display: inline-flex">
       <h3>3. </h3>
-      <input type="text" id="pokemonAutocomplete3" list="pokemonNameList" autocomplete = "off"/>
+      <input type="text" id="pokemonAutocomplete3" list="pokemonNameList" />
     </div>
 
     <div style="display: inline-flex">
       <h3>4. </h3>
-      <input type="text" id="pokemonAutocomplete4" list="pokemonNameList" autocomplete = "off"/>
+      <input type="text" id="pokemonAutocomplete4" list="pokemonNameList" />
     </div>
 
     <div style="display: inline-flex">
       <h3>5. </h3>
-      <input type="text" id="pokemonAutocomplete5" list="pokemonNameList" autocomplete = "off"/>
+      <input type="text" id="pokemonAutocomplete5" list="pokemonNameList" />
     </div>
 
     <div style="display: inline-flex">
       <h3>6. </h3>
-      <input type="text" id="pokemonAutocomplete6" list="pokemonNameList" autocomplete = "off"/>
+      <input type="text" id="pokemonAutocomplete6" list="pokemonNameList" />
       
     </div>
 
