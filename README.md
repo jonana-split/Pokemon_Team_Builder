@@ -1,4 +1,4 @@
-#To use our website:
+<h1>To use our website:</h1>
 
 1. Install sudo live-server by running this command in your terminal: "sudo npm install -g live-server"
 
