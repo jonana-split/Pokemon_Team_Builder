@@ -11,6 +11,6 @@
 
 <b>1.</b> Select a data structure between ordered and unordered maps
 
-<b>2.</b> Type in the name of 6 Pokemon of your choice (make sure to click the option from the dropdown menu, since the pokemon are case-sensitive
+<b>2.</b> Type out the names of 6 Pokemon of your choice (make sure to click the name from the provided dropdown menu, since the Pokemon names are case-sensitive)
 
 <b>3.</b> Click 'submit' and analyze your team of choice!
