@@ -105,11 +105,12 @@ async function getSortedData(){
                 weaknesses: pokemon.weaknesses,
                 resistances: pokemon.resistances,
                 sprite: pokemon.sprite
+
+                
             }
             );
         });
 
-        console.log(pokeOrderedMap); //Prints the map
     } catch (error){
         console.error(error);
     }
