@@ -47,6 +47,8 @@ Personal Projects:
     var isOrder;
     var isUnordered;
 
+    //initialize all variables for spans
+
       var pokemon1Answer = $('#pokemon1Answer');
       var pokemon2Answer = $('#pokemon2Answer');
       var pokemon3Answer = $('#pokemon3Answer');
@@ -134,8 +136,10 @@ Personal Projects:
     }
 
     function submit(){
+      //if no pokemon or data structures are chosen dislay this error message
       $('#error').text("Please choose 6 valid Pokemon and select a data structure.");
-      //ordered maps
+      
+      // for ordered maps
       if(isOrder == true && isUnordered == false){
         var pokemon1 = document.getElementById('pokemonAutocomplete1');
         var pokemon2 = document.getElementById('pokemonAutocomplete2');
@@ -144,10 +148,12 @@ Personal Projects:
         var pokemon5 = document.getElementById('pokemonAutocomplete5');
         var pokemon6 = document.getElementById('pokemonAutocomplete6');
 
+        //debug checks
         console.log(pokeOrderedMap.get(pokemon1.value));
         console.log("meow");
         console.log(pokeOrderedMap.get(pokemon1.value).type);
 
+        //if all pokemon are picked... change the span text of all pokemon displays to correspond to the pokemon with a matching key in the map 
         if(pokemon1.value == pokeOrderedMap.get(pokemon1.value).name && pokemon2.value == pokeOrderedMap.get(pokemon2.value).name && pokemon3.value == pokeOrderedMap.get(pokemon3.value).name && pokemon4.value == pokeOrderedMap.get(pokemon4.value).name && pokemon5.value == pokeOrderedMap.get(pokemon5.value).name && pokemon6.value == pokeOrderedMap.get(pokemon6.value).name){
           $('#error').text("");
           $('#pokemon1Answer').text(pokemon1.value);
@@ -171,6 +177,7 @@ Personal Projects:
           $('#pokemon5SpriteTXT').text(pokeOrderedMap.get(pokemon5.value).sprite);
           $('#pokemon6SpriteTXT').text(pokeOrderedMap.get(pokemon6.value).sprite);
 
+          //used to add the "src" attribute to a span in order to give the image link
           $("#pokemon1DISPLAY").attr("src", $("#pokemon1SpriteTXT").text());
           $("#pokemon2DISPLAY").attr("src", $("#pokemon2SpriteTXT").text());
           $("#pokemon3DISPLAY").attr("src", $("#pokemon3SpriteTXT").text());
@@ -198,7 +205,7 @@ Personal Projects:
 
         }
         
-      //unordered maps
+      //for unordered maps
       }else if(isUnordered == true && isOrder == false){
         var pokemon1 = document.getElementById('pokemonAutocomplete1');
         var pokemon2 = document.getElementById('pokemonAutocomplete2');
@@ -207,10 +214,12 @@ Personal Projects:
         var pokemon5 = document.getElementById('pokemonAutocomplete5');
         var pokemon6 = document.getElementById('pokemonAutocomplete6');
 
+        //debugging
         console.log(pokeMap.get(pokemon1.value));
         console.log("meow");
         console.log(pokeMap.get(pokemon1.value).type)
 
+        //if all pokemon are picked... change the span text of all pokemon displays to correspond to the pokemon with a matching key in the map 
         if(pokemon1.value == pokeMap.get(pokemon1.value).name && pokemon2.value == pokeMap.get(pokemon2.value).name && pokemon3.value == pokeMap.get(pokemon3.value).name && pokemon4.value == pokeMap.get(pokemon4.value).name && pokemon5.value == pokeMap.get(pokemon5.value).name && pokemon6.value == pokeMap.get(pokemon6.value).name){
           $('#error').text("");
           $('#pokemon1Answer').text(pokemon1.value);
@@ -234,6 +243,7 @@ Personal Projects:
           $('#pokemon5SpriteTXT').text(pokeMap.get(pokemon5.value).sprite);
           $('#pokemon6SpriteTXT').text(pokeMap.get(pokemon6.value).sprite);
 
+          //used to add the "src" attribute to a span in order to give the image link
           $("#pokemon1DISPLAY").attr("src", $("#pokemon1SpriteTXT").text());
           $("#pokemon2DISPLAY").attr("src", $("#pokemon2SpriteTXT").text());
           $("#pokemon3DISPLAY").attr("src", $("#pokemon3SpriteTXT").text());
@@ -267,6 +277,7 @@ Personal Projects:
   </script>
   <title>Pokemon Team Builder - Group 33: DSA GO!</title>
 
+  <!-- general styling -->
 <style>
  
 .flex-container {
@@ -299,6 +310,8 @@ Personal Projects:
 
 <body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
 
+  <!-- Create the header DIV -->
+
   <div class="jumbotron jumbotron-fluid justify-content-center w-100 text-center" style="display: inline-flex; margin-bottom:0; background-color:#317d9c; color:#d1edf8;">
     <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;margin-right:20px;">
     <div>
@@ -309,6 +322,7 @@ Personal Projects:
     <img src="Images/pokemon.png" alt="A simplistic Pokeball." style="width:100px;height:100px;margin-left:20px;">
   </div>
 
+  <!-- create the buttons that correlate to picking your data structure -->
   <div style="background-color:#0d536e; color:#8ec2d6;padding: 20px;"">
     <h5 style = "padding-top: 20px;" class="text-center">Pick a data structure...</h5>
   <div class="center" >
@@ -333,7 +347,7 @@ Personal Projects:
     <br>
 
     <!--
-    POKEMON NAMES NEED TO COME FROM NAMES LIST ARRAY
+    Pokemon names in dropdown come from list array
     -->
     <datalist id="pokemonNameList"></datalist>
       <script>
@@ -343,6 +357,7 @@ Personal Projects:
           var pokeList = document.getElementById('pokemonNameList');
           pokeList.innerHTML = "";
 
+          //for every pokemon in the list, create an 'option' in the dropdown
           for(let i=0; i <= pokeNamesList.length; i++){
             var option = document.createElement('option');
             option.value = pokeNamesList[i];
@@ -351,6 +366,7 @@ Personal Projects:
         }
       </script>
 
+        <!-- allow users to type in their pokemon choices and give them an autocomplete list of the pokemon names -->
     <div style="display: inline-flex">
       <h3>1. </h3>
       <input type="text" id="pokemonAutocomplete1" list="pokemonNameList" autocomplete = "off"/>
@@ -385,9 +401,11 @@ Personal Projects:
 <br>
 <br>
 <div class="center" >
+  <!-- submit button! submits choices and checks if all pokemon were written in and if a data structure was chosen -->
   <input  style="margin: 0;" class='justify-content-center' type='button' value='Submit' onClick='submit()'>
 </div>
 
+<!-- where the error message appears -->
 <p><span style= "text-align: center;color:rgb(242, 245, 143)" id='error'></span></p>
 
 <br>
@@ -396,6 +414,7 @@ Personal Projects:
 
 <div class="flex-container">
     
+  <!-- these all display the Pokemon by having default "spans" that are then replaced by the corresponding pokemon data -->
     <div>
       <br>
       <h5><span id='pokemon1Answer'>Pokemon 1</span></h5>
@@ -496,7 +515,7 @@ Personal Projects:
 
 
 </div>
-
+<!-- the footer -->
 <div class="footer; w-100; text-center" style = "background-color:#317d9c; color:#d1edf8">
 <br class="footer">
 <p class="footer">&copy; 2024 Group 33 </p>

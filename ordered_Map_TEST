@@ -9,187 +9,9 @@
 //https://mgechev.github.io/javascript-algorithms/data-structures_red-black-tree.js.html
 //https://github.com/liubinyi/red-black-tree-js/blob/master/src/createNode.js
 //https://www.growingwiththeweb.com/data-structures/red-black-tree/overview/
-/*
-const colors = {
-    RED: 'RED',
-    BLACK: 'BLACK'
-};
-
-class Node {
-    constructor(key, value, color = colors.RED) { 
-        this.color = color;
-        this.left = null;
-        this.right = null;
-        this.parent = null;
-        this.key = key;
-        this.value = value;
-
-    }
-}
-
-class orderedPokeMap {
-    constructor() {
-        //this.orderedPokeMap = [];
-        this.root = null;
-    }
-
-    insert(key, value){
-        
-        let node = new Node(key, value, colors.RED);
-        let curr = this.root;
-        let temp = none;
-
-        if(this.root == null){
-            this.root = node;
-            node.color = colors.BLACK;
-            node.parent = null;
-        }else{
-            while(curr != null){
-                temp = curr;
-    
-                if(node.key < curr.key){
-                    curr = curr.left;
-                }else{
-                    curr = curr.right;
-                }
-            }
-        }
-
-        node.parent = temp;
-
-        if(node.key < temp.key){
-            temp.left = node;
-        }else{
-            temp.right = node;
-        }
-
-            let nodeLeft = new Node(null, null, colors.RED);
-            nodeLeft.color = colors.BLACK;
-            nodeLeft.parent = node;
-            node.left = nodeLeft;
-
-            let nodeRight = new Node(null, null, colors.RED);
-            nodeRight.color = colors.BLACK;
-            nodeRight.parent = node;
-            node.left = nodeRight;
 
 
-        this.fixTree(node);
-
-    }
-
-
-    fixTree(node) {
-
-        if(node.parent == null){
-            node.color = colors.BLACK;
-        }
-        /*if(node.parent.color == colors.BLACK){
-            return;
-        }
-
-
-        let parent = node.parent;
-
-        var grandparent = new Node();
-
-        if(node.parent != null && node != null){
-            grandparent = node.parent.parent;
-        }else{
-            grandparent = null;
-        }
-
-        var uncle = new Node();
-        if(grandparent && node.parent == grandparent.left){
-            uncle = grandparent.right;
-        }else if(grandparent && node.parent == grandparent.right){
-            uncle = grandparent.left;
-        }
-        
-        if(parent != null){
-        if(uncle != null && uncle.color == colors.RED){
-            parent.color = uncle.color = colors.BLACK;
-            grandparent.color = colors.RED;
-            this.fixTree(grandparent);
-            return;
-        }
-        if(node == parent.right && parent == grandparent.left){
-            this.rotateLeft(parent);
-            node = parent;
-            parent = node.parent;
-        }else if(node == parent.left && parent == grandparent.right){
-            this.rotateRight(parent);
-            node = parent;
-            parent = node.parent;
-        }
-
-        parent.color = colors.BLACK;
-        grandparent.color = colors.RED;
-    
-        if(node == parent.left){
-            this.rotateRight(grandparent);
-        }else{
-            this.rotateLeft(grandparent);
-        }
-    }
-    }
-
-    rotateLeft(node) {
-      
-        const current = node.right;
-
-        node.right = current.left;
-        current.left = node;
-
-        if(current.left != null){
-            current.left.parent = node;
-        }
-
-        current.parent = node.parent;
-
-        //replace parent (node, current)
-        if(!node.parent){
-            this.root = current;
-        }else if(node == node.parent.left){
-            node.parent.left = current;
-        }else{
-            node.parent.right = current;
-        }
-
-        current.left = node;
-
-        node.parent = current;
-
-    }
-
-    rotateRight(node) {
-         
-        const current = node.left;
-
-        node.left = current.right;
-        current.right = node;
-
-        if(current.right != null){
-            current.right.parent = node;
-        }
-
-        current.parent = node.parent;
-
-        //replace parent (node, current)
-        if(!node.parent){
-            this.root = current;
-        }else if(node == node.parent.right){
-            node.parent.right = current;
-        }else{
-            node.parent.left = current;
-        }
-
-        current.right = node;
-
-        node.parent = current;
-
-    }
-
+class orderedPokeMap{
     get(key) {
         let node = this.root;
         if(key<node.key){
@@ -233,7 +55,7 @@ class orderedPokeMap {
     }
 
 }
-
+/*
 
 class orderedPokeMap{
     constructor() {
@@ -253,7 +75,7 @@ class orderedPokeMap{
     }
 
   }
-
+*/
 function comparePokemon(a,b){
     if(a.name < b.name) {
         return -1;
@@ -294,4 +116,3 @@ async function getSortedData(){
     console.log("getSortedData completed");
     return pokeOrderedMap.getAllNames();
 }
-*/
