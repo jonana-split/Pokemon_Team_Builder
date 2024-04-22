@@ -8,7 +8,8 @@ Joanna Mijares
 Sahan Chery
 
 CITATIONS:
-1) https://medium.com/@sergio13prez/fetching-them-all-poke-api-62ca580981a2
+1) https://pokeapi.co/
+2) https://medium.com/@sergio13prez/fetching-them-all-poke-api-62ca580981a2
 */
 
 // holds all normal pokemon (not fusions)

@@ -1,3 +1,13 @@
+/*
+COP3530 Data Structures and Algorithms Final Project
+The Pokemon Team Builder
+
+TEAM:
+Arwen Dowers
+Joanna Mijares
+Sahan Chery
+*/
+
 class orderedPokeMap{
     constructor() {
         this.orderedMap = {};
@@ -17,6 +27,7 @@ class orderedPokeMap{
 
   }
 
+// compares pokemon for alphabetical sorting
 function comparePokemon(a,b){
     if(a.name < b.name) {
         return -1;
@@ -27,9 +38,11 @@ function comparePokemon(a,b){
     return 0;
 }
 
+// creates ordered map
 let pokeOrderedMap = new orderedPokeMap();
 
 async function getSortedData(){
+    // starts with fresh map when getting data
     pokeOrderedMap = new orderedPokeMap();
     try{
         const pokeJson = await fetch('allPokemonData.json');
@@ -37,9 +50,11 @@ async function getSortedData(){
             throw new Error('Cannot capture pokemon');
         }
         const pokeData = await pokeJson.json();
+        // sorts pokemon using the compare function
         pokeData.sort(comparePokemon);
-        //Gets pokemon data from JSON
+        // gets pokemon data from allPokemonData.json
         pokeData.forEach(pokemon => {
+            // gets each pokemon's values
             pokeOrderedMap.insert(pokemon.name, {
                 name: pokemon.name,
                 type: pokemon.type,
@@ -50,63 +65,11 @@ async function getSortedData(){
             );
         });
 
-        console.log(pokeOrderedMap); //Prints the map
+        // prints the map
+        console.log(pokeOrderedMap);
     } catch (error){
         console.error(error);
     }
     console.log("getSortedData completed");
     return pokeOrderedMap.getAllNames();
 }
-
-/*function orderedPokemon(){
-    try{
-        const pokeJson = fs.readFileSync('allPokemonData.json', 'utf8');
-        const pokemonData = JSON.parse(pokeJson);
-
-        //Add pokemon to ordered map
-        pokemonData.forEach(pokemon => {
-            pokeOrdered.push({
-                name: pokemon.name,
-                type: pokemon.type,
-                weaknesses: pokemon.weaknesses,
-                resistances: pokemon.resistances
-            });
-        });
-
-        console.log("Pokemon data read.");
-    } catch (err){
-        console.error("Error reading Pokemon", err);
-    }
-}
-
-orderedPokemon();*/
-
-/*async function weakAndstr(){
-    try{
-        for (const pokeName in pokeMap){
-            const poke = pokeMap[pokeName];
-            const pokeType = poke.type;
-
-            const pokeRes = await fetch('allPokemonData.json');
-            if (!pokeRes.ok){
-                throw new Error('Could not catch pokemon');
-            }
-
-            const pokeData = await pokeRes.json();
-            const pokeDamage = pokeData.poke_damage;
-            //Updates weaknesses and resistances based on damage relations
-            pokeDamage.double_damage_from.forEach(weakness =>{
-                pokemon.weaknesses.push(weakness.name);
-            });
-            pokeDamage.half_damage_from.forEach(resistance => {
-                pokemon.resistances.push(resistance.name);
-            });
-        }
-        console.log(pokeMap); //prints unordered map
-    } catch (error){
-        console.error(error);
-    }
-}*/
-
-
-//getSortedData(); //Calls function to get and read data from the JSON file

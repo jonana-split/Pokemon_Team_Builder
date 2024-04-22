@@ -1,22 +1,33 @@
-//CITATIONS:
+/*
+COP3530 Data Structures and Algorithms Final Project
+The Pokemon Team Builder
 
-//Hash Maps
-//https://www.freecodecamp.org/news/javascript-hash-table-associative-array-hashing-in-js/
-//https://www.educative.io/blog/data-strucutres-hash-table-javascript#implement
-//https://www.youtube.com/watch?v=y3CcHKEM8r8
-//https://www.squash.io/javascript-hashmap-a-complete-guide/#:~:text=To%20implement%20a%20HashMap%2C%20we,list%20of%20key%2Dvalue%20pairs.
+TEAM:
+Arwen Dowers
+Joanna Mijares
+Sahan Chery
+
+CITATIONS:
+1) https://www.freecodecamp.org/news/javascript-hash-table-associative-array-hashing-in-js/
+2) https://www.educative.io/blog/data-strucutres-hash-table-javascript#implement
+3) https://www.youtube.com/watch?v=y3CcHKEM8r8
+4) https://www.squash.io/javascript-hashmap-a-complete-guide/#:~:text=To%20implement%20a%20HashMap%2C%20we,list%20of%20key%2Dvalue%20pairs.
+*/
 
 class unorderedPokeMap{
     constructor() {
         this.unorderedMap = [];
+        // bucket size
         this.size = 10000;
     }
 
+    // creates a hash map
     hash(key){
         var hash = key.toString().length % this.size;
         return hash;
     }
   
+    // inserts pokemon into the hash map
     insert(key, value) {
         const index = this.hash(key);
 
@@ -27,6 +38,7 @@ class unorderedPokeMap{
         this.unorderedMap[index].push([key, value]);
     }
 
+    // gets the pokemon from a bucket
     get(key) {
         const index = this.hash(key);
         const bucket = this.unorderedMap[index];
@@ -41,6 +53,7 @@ class unorderedPokeMap{
         return undefined;
     }
 
+    // gets a list of all pokemon names
     getAllNames() {
         let allNames = [];
         for(let i = 0; i < this.size; i++) {
@@ -57,11 +70,11 @@ class unorderedPokeMap{
     }
   }
 
-let pokeMap = new unorderedPokeMap(); //create an unordered map as a javascript object
+// creates an unordered map
+let pokeMap = new unorderedPokeMap();
 
-
-//getData(); //Calls function to get and read data from the JSON file
 async function getData(){
+    // starts with a fresh map when getting data
     pokeMap = new unorderedPokeMap();
     try{
         const pokeJson = await fetch('allPokemonData.json');
@@ -69,8 +82,9 @@ async function getData(){
             throw new Error('Cannot capture pokemon');
         }
         const pokeData = await pokeJson.json();
-        //Gets pokemon data from JSON
+        //gets pokemon data from allPokemonData.json
         pokeData.forEach(pokemon => {
+            // gets each pokemon's values
             pokeMap.insert(pokemon.name, {
                 name: pokemon.name,
                 type: pokemon.type,
@@ -81,7 +95,8 @@ async function getData(){
             );
     });
 
-        console.log(pokeMap); //Prints the map
+        // prints the map
+        console.log(pokeMap);
     } catch (error){
         console.error(error);
     }

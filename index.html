@@ -93,6 +93,7 @@ Personal Projects:
 
       var dataStructure = $('#dataStructure');
 
+  // runs the ordered map
    async function ordered(){
       isOrder = true;
       isUnordered = false;
@@ -100,6 +101,7 @@ Personal Projects:
 
       let sortedNamesList = await getSortedData();
       let end = performance.now();
+      // times efficiency duration
       let duration = (end - start).toFixed(2);
 
       $('#dataStructure').text("Ordered Map");
@@ -111,6 +113,7 @@ Personal Projects:
 
     }
 
+    // runs the unordered map
     async function unordered(){
       isOrder = false;
       isUnordered = true;
@@ -118,6 +121,7 @@ Personal Projects:
 
       let namesList = await getData();
       let end = performance.now();
+      // times efficiency duration
       let duration = (end - start).toFixed(2);
 
 
@@ -334,18 +338,6 @@ Personal Projects:
     <datalist id="pokemonNameList"></datalist>
       <script>
         var pokeNamesList = [];
-
-        /* fetch('./allPokemonData.json')
-        .then((response) => response.json())
-        .then((pokemonNames) => {
-
-          for(let i=0; i < pokemonNames.length; i++){
-            pokeNamesList.push(pokemonNames[i].name);
-          }
-
-          setPokeList(pokeNamesList);
-
-        }); */
 
         function setPokeList(pokeNamesList) {
           var pokeList = document.getElementById('pokemonNameList');
