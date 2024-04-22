@@ -9,7 +9,7 @@
 //https://mgechev.github.io/javascript-algorithms/data-structures_red-black-tree.js.html
 //https://github.com/liubinyi/red-black-tree-js/blob/master/src/createNode.js
 //https://www.growingwiththeweb.com/data-structures/red-black-tree/overview/
-
+/*
 const colors = {
     RED: 'RED',
     BLACK: 'BLACK'
@@ -86,7 +86,7 @@ class orderedPokeMap {
         }
         /*if(node.parent.color == colors.BLACK){
             return;
-        }*/
+        }
 
 
         let parent = node.parent;
@@ -234,7 +234,7 @@ class orderedPokeMap {
 
 }
 
-/*
+
 class orderedPokeMap{
     constructor() {
         this.orderedMap = {};
@@ -253,7 +253,7 @@ class orderedPokeMap{
     }
 
   }
-*/
+
 function comparePokemon(a,b){
     if(a.name < b.name) {
         return -1;
@@ -294,3 +294,4 @@ async function getSortedData(){
     console.log("getSortedData completed");
     return pokeOrderedMap.getAllNames();
 }
+*/
