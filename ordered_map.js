@@ -105,38 +105,53 @@ class orderedPokeMap{
       //primarily from class slides
       fixInsert(node) {
     
+        //current node is the one we are fixing
         let current = node;
 
+        //if current exists and its parent is null then current is the root and is therefore black
         if(current.parent == null && current){
             current.color = colors.BLACK;
           return;
         }
 
+        //if current has a prarent and its parent's color is black, no need for any fixing.
         if(current.parent && current.parent.color == colors.BLACK){
             return;
         }
 
+        //establish parent and grandparent nodes
         const parent = current.parent;
         const grandparent = current.parent.parent;
+
+        //create uncle...
         let uncle;
         
+        //establish which node in particular is the uncle
+        //if the parent is the left child, uncle is the right child
         if(parent && grandparent && parent == grandparent.left){
             uncle = grandparent.right;
+
+        //if the parent is the right child, uncle is the left child
         }else if(parent && grandparent && parent == grandparent.right){
             uncle = grandparent.left;
         }
 
+        //if the uncle is red, then the parent and uncle both need to switch colors to be black
+        //the grandparent can then be red, but we now need to recursively check if the grandparent beinf red is valid
         if(grandparent && uncle && uncle.color == colors.RED){
             parent.color = uncle.color = colors.BLACK;
             grandparent.color = colors.RED;
             this.fixInsert(grandparent);
             return;
         }
+
+        //perform a left rotation if left subtree of grandparent is unbalanced
         if(parent && grandparent && node == parent.right && parent == grandparent.left){
             this.rotateLeft(parent);
             node = parent;
             parent = node.parent;
-            
+
+        //perform a right rotation if right subtree of grandparent is unbalanced
         }else if(parent && grandparent && node == parent.left && parent == grandparent.right){
             this.rotateRight(parent);
             node = parent;
@@ -144,9 +159,12 @@ class orderedPokeMap{
             
         }
 
+        //set parent to black and grandparent to red
         parent.color = colors.BLACK;
         grandparent.color = colors.RED;
 
+        //node is to the parent's left, perform a right rotation on the grandparent to accomodate color changes
+        //vice versa for if node is on parent's right
         if(node == parent.left){
             this.rotateRight(grandparent);
         }else{
@@ -220,18 +238,22 @@ class orderedPokeMap{
       //modified search and/or delete function! gets the value associated with key recursively
       get(key, node = this.root) {
         
+        //if there is no node then just return null
         if(!node){
             return null;
         }
 
+        //if the key is the same as the node's key, then this is the value we are looking for
         if(key == node.key){
             return node.value;
         }
 
+        //if the key is LESS than the node's key, recursively call get on the node's left
         if(key < node.key){
             return this.get(key, node.left);
         }
 
+        //if the key is MORE than the node's key, recursively call get on the node's right
         return this.get(key, node.right);
         
     }
@@ -243,7 +265,7 @@ class orderedPokeMap{
         }
 
         this.inorder(node.left, allNames);
-        allNames.push(node.key);
+        allNames.push(node.key); //push selected name to allNames array
         this.inorder(node.right, allNames);
 
     }
@@ -251,13 +273,13 @@ class orderedPokeMap{
     //creates an array of all pokemon names
     getAllNames(){
         
+        //array to hold all names
         let allNames = [];
 
+        //go through the tree in order to get an already sorted array
        this.inorder(this.root, allNames);
 
-        //allNames.push("meow");
-
-        console.log("Names:", allNames);
+        console.log("Names:", allNames); //some debugging
 
         return allNames;
 
