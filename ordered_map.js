@@ -102,7 +102,7 @@ class orderedPokeMap{
 
 
       //FIX INSERT (adjusts colors and handles rotations)
-      //primarily from class slides
+      //primarily from class slides 96-146
       fixInsert(node) {
     
         //current node is the one we are fixing
