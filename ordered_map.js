@@ -173,67 +173,92 @@ class orderedPokeMap{
 
       }
 
-
-      rotateLeft(node) {
-        const current = node.right
+    //heavily referenced for rotations:
+    //https://dev.to/humblecoder00/deep-dive-into-data-structures-using-javascript-red-black-tree-4lnb
+    //https://www.sahinarslan.tech/posts/deep-dive-into-data-structures-using-javascript-red-black-tree
+    //https://www.youtube.com/watch?v=95s3ndZRGbk
+    //https://www.codesdope.com/course/data-structures-red-black-trees-insertion/
     
+    rotateLeft(node) {
+
+        //the current node we're looking at is the node's right node
+        const current = node.right
+        const parent = node.parent;
+
+        //node's right is now the current node's left
         node.right = current.left
     
-        current.left = node
-    
-        current.color = node.color
-        node.color = colors.RED
-        
-        const parent = node.parent;
-        if (!parent) {
-          this.root = current
-        }
-        else if (node === parent.left) {
-          parent.left = current
-        }
-        else {
-          parent.right = current
+        //if the left node of current exists, then the parent of current's left node is now the original node
+        if(current.left){
+            current.left.parent = node;
         }
 
-            current.parent = node.parent
-        
-            node.parent = current
-        
-            if (node.right) {
-            node.right.parent = node
-            }
+        //set curren't parent to og node's parent
+        current.parent = parent;
+
+        //if there is no parent, the node we're looking at is the root
+        if (!parent) {
+          this.root = current;
+
+        //otherwise, if the og node is now the og node's parent's left, the paren't left node is the current node
+        }else if (node == parent.left) {
+            parent.left = current;
+
+        //otherwise, the og node's parent's right node is the current node
+        }else{
+            parent.right = current;
         }
+
+        //our current node's left node is now officially the original node
+        current.left = node;
+
+        //the og node's parent is officially the current node. rotation success
+        node.parent = current;
+
+    }
     
-      rotateRight(node) {
+    //heavily referenced for rotations:
+    //https://dev.to/humblecoder00/deep-dive-into-data-structures-using-javascript-red-black-tree-4lnb
+    //https://www.sahinarslan.tech/posts/deep-dive-into-data-structures-using-javascript-red-black-tree
+    //https://www.youtube.com/watch?v=95s3ndZRGbk
+    //https://www.codesdope.com/course/data-structures-red-black-trees-insertion/
+    rotateRight(node) {
+        
+        //the current node we're looking at is the node's left node
         const current = node.left
-    
+        const parent = node.parent;
+
+        //node's left is now the current node's right
         node.left = current.right
     
-        current.right = node
-    
-        current.color = node.color
-    
-        node.color = colors.RED
-    
-        const parent = node.parent;
-        if (!parent) {
-          this.root = current
-        }
-        else if (node === parent.left) {
-          parent.left = current
-        }
-        else {
-          parent.right = current
+        //if the right node of current exists, then the parent of current's right node is now the original node
+        if(current.right){
+            current.right.parent = node;
         }
 
-        current.parent = node.parent
-    
-        node.parent = current
-    
-        if (node.left) {
-          node.left.parent = node
+        //set curren't parent to og node's parent
+        current.parent = parent;
+
+        //if there is no parent, the node we're looking at is the root
+        if (!parent) {
+            this.root = current;
+
+        //otherwise, if the og node is now the og node's parent's right, the paren't right node is the current node
+        }else if (node == parent.right) {
+            parent.right = current;
+
+        //otherwise, the og node's parent's left node is the current node
+        }else{
+            parent.left = current;
         }
-      }
+
+        //our current node's right node is now officially the original node
+        current.right = node;
+
+        //the og node's parent is officially the current node. rotation success
+        node.parent = current;
+        
+    }
       
       //modified search and/or delete function! gets the value associated with key recursively
       get(key, node = this.root) {
