@@ -8,133 +8,178 @@ Joanna Mijares
 Sahan Chery
 */
 
-const NodeColor = {
+
+//Implementing RedBlack trees in JavaScript
+//Class Slides 96-146 4 - Balanced Trees.pdf
+//https://www.sahinarslan.tech/posts/deep-dive-into-data-structures-using-javascript-red-black-tree
+//https://dev.to/humblecoder00/deep-dive-into-data-structures-using-javascript-red-black-tree-4lnb
+//https://www.youtube.com/watch?v=IDqdf7VicDs
+//https://dev.to/igorok/javascript-red-black-tree-4703
+//https://www.programiz.com/dsa/red-black-tree
+//https://mgechev.github.io/javascript-algorithms/data-structures_red-black-tree.js.html
+//https://github.com/liubinyi/red-black-tree-js/blob/master/src/createNode.js
+//https://www.growingwiththeweb.com/data-structures/red-black-tree/overview/
+
+
+//initialize the colors we'll be using: Red and Black
+const colors = {
     RED: 'RED',
     BLACK: 'BLACK',
   }
   
-  class RBTNode {
+  //establish a node class for creating a node
+  //each node on the tree has a key, value, color, and left and right and parent nodes
+  class Node {
     constructor(key, value, parent = null) {
       this.key = key;
-    this.value = value;
+      this.value = value;
+      this.parent = parent;
+      this.color = colors.RED;
       this.left = null;
       this.right = null;
-      this.parent = parent;
-      this.color = NodeColor.RED;
     }
   }
 
+  //creates our ordered map!
 class orderedPokeMap{
 
     constructor() {
         this.root = null
       }
 
+      //INSERT
       insert(key, value) {
 
+        //inner function, learned from https://dev.to/humblecoder00/deep-dive-into-data-structures-using-javascript-red-black-tree-4lnb
         const insertHelper = (node) => {
-          const currNode = node
+          
+            //the current node
+            let current = node;
     
-          if (key < currNode.key) {
-            if (currNode.left) {
-              insertHelper(currNode.left)
-            } else {
-              currNode.left = new RBTNode(key, value, currNode)
-              currNode.left.parent = currNode
-              this.fixInsert(currNode.left)
-            }
-          } else if (key > currNode.key) {
+            //if the key is greater than the current node's key
+            if (key > current.key) {
+                //if the current's right child exists...
+                if (current.right != null) {
+                    //recursively call insertHelper to keep searching for place to insert
+                    insertHelper(current.right)
+                }else{
+                    //otherwise, the right node is now the new inserted key/value node. 
+                    //set the parent of the new node to be the current node
+                    current.right = new Node(key, value, current)
+                    current.right.parent = current
+                    this.fixInsert(current.right)
+                  }
+                
+                  //if the key is less than the current node's key
+            }else if (key < current.key) {
         
-            if (currNode.right) {
-              insertHelper(currNode.right)
-            } else {
-    
-              currNode.right = new RBTNode(key, value, currNode)
-              currNode.right.parent = currNode
-              this.fixInsert(currNode.right)
-            }
+                //if the current node's left child exists...
+                if (current.left!= null) {
+                    //recursively call insertHelper to keep searching for place to insert
+                    insertHelper(current.left)
+                }else{
+                    //otherwise, the left node is now the new inserted key/value node. 
+                    //set the parent of the new node to be the current node
+                    current.left = new Node(key, value, current)
+                    current.left.parent = current
+                    this.fixInsert(current.left)
+                    }
           }
   
         }
+
+        //if there is no root, make a new one and fix the insertion
+        if (this.root == null) {
+            this.root = new Node(key, value, this.root);
+            this.fixInsert(this.root);
     
-        if (!this.root) {
-         
-          this.root = new RBTNode(key, value, this.root)
-          this.fixInsert(this.root)
-        } else {
-          insertHelper(this.root)
+        }else {
+            //insert the root
+            insertHelper(this.root);
         }
+    
       }
 
 
+      //FIX INSERT (adjusts colors and handles rotations)
+      //primarily from class slides
       fixInsert(node) {
-
-        let currNode = node
     
-        while (currNode.parent && currNode.parent.color === NodeColor.RED && currNode.parent.parent) {
-          const { parent } = currNode
-          const grandparent = parent.parent
-    
-          if (parent === grandparent.left) {
-            if (grandparent.right && grandparent.right.color === NodeColor.RED) {
-                //flip colors!
-                grandparent.color = NodeColor.RED;
-                grandparent.left.color = NodeColor.BLACK;
-                grandparent.right.color = NodeColor.BLACK;
-              
-            } else {
+        let current = node;
 
-              if (currNode === parent.right) {
-                this.rotateLeft(parent)
-                currNode = parent
-              }
-             
-              this.rotateRight(grandparent)
-            }
-          } else {
-            if (grandparent.left && grandparent.left.color === NodeColor.RED) {
-                grandparent.color = NodeColor.RED;
-                grandparent.left.color = NodeColor.BLACK;
-                grandparent.right.color = NodeColor.BLACK;
-                currNode = grandparent;
-            } else {
-              if (currNode === parent.left) {
-                this.rotateRight(parent)
-                currNode = parent
-              }
-              this.rotateLeft(grandparent)
-            }
-          }
-          currNode = grandparent
+        if(current.parent == null && current){
+            current.color = colors.BLACK;
+          return;
         }
-        this.root.color = NodeColor.BLACK
+
+        if(current.parent && current.parent.color == colors.BLACK){
+            return;
+        }
+
+        const parent = current.parent;
+        const grandparent = current.parent.parent;
+        let uncle;
+        
+        if(parent && grandparent && parent == grandparent.left){
+            uncle = grandparent.right;
+        }else if(parent && grandparent && parent == grandparent.right){
+            uncle = grandparent.left;
+        }
+
+        if(grandparent && uncle && uncle.color == colors.RED){
+            parent.color = uncle.color = colors.BLACK;
+            grandparent.color = colors.RED;
+            this.fixInsert(grandparent);
+            return;
+        }
+        if(parent && grandparent && node == parent.right && parent == grandparent.left){
+            this.rotateLeft(parent);
+            node = parent;
+            parent = node.parent;
+            
+        }else if(parent && grandparent && node == parent.left && parent == grandparent.right){
+            this.rotateRight(parent);
+            node = parent;
+            parent = node.parent;
+            
+        }
+
+        parent.color = colors.BLACK;
+        grandparent.color = colors.RED;
+
+        if(node == parent.left){
+            this.rotateRight(grandparent);
+        }else{
+            this.rotateLeft(grandparent);
+        }
+
       }
 
 
       rotateLeft(node) {
-        const currNode = node.right
+        const current = node.right
     
-        node.right = currNode.left
+        node.right = current.left
     
-        currNode.left = node
+        current.left = node
     
-        currNode.color = node.color
-        node.color = NodeColor.RED
+        current.color = node.color
+        node.color = colors.RED
         
         const parent = node.parent;
         if (!parent) {
-          this.root = currNode
+          this.root = current
         }
         else if (node === parent.left) {
-          parent.left = currNode
+          parent.left = current
         }
         else {
-          parent.right = currNode
+          parent.right = current
         }
 
-            currNode.parent = node.parent
+            current.parent = node.parent
         
-            node.parent = currNode
+            node.parent = current
         
             if (node.right) {
             node.right.parent = node
@@ -142,46 +187,33 @@ class orderedPokeMap{
         }
     
       rotateRight(node) {
-        const currNode = node.left
+        const current = node.left
     
-        node.left = currNode.right
+        node.left = current.right
     
-        currNode.right = node
+        current.right = node
     
-        currNode.color = node.color
+        current.color = node.color
     
-        node.color = NodeColor.RED
+        node.color = colors.RED
     
         const parent = node.parent;
         if (!parent) {
-          this.root = currNode
+          this.root = current
         }
         else if (node === parent.left) {
-          parent.left = currNode
+          parent.left = current
         }
         else {
-          parent.right = currNode
+          parent.right = current
         }
 
-        currNode.parent = node.parent
+        current.parent = node.parent
     
-        node.parent = currNode
+        node.parent = current
     
         if (node.left) {
           node.left.parent = node
-        }
-      }
-
-      _replaceParent(currNode, newNode) {
-        const { parent } = currNode
-        if (!parent) {
-          this.root = newNode
-        }
-        else if (currNode === parent.left) {
-          parent.left = newNode
-        }
-        else {
-          parent.right = newNode
         }
       }
       
