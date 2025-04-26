@@ -1,6 +1,8 @@
 <h1>To use our website:</h1>
 
-<b>1.</b> Install sudo live-server by running this command in your terminal: "sudo npm install -g live-server"
+<b>1.</b> Install sudo live-server by running this command in your terminal: 
+Mac: "sudo npm install -g live-server"
+Windows: "npm install -g live-server" in Command Prompt
 
 <b>2.</b> Once it's installed, type "live-server" into the terminal to run out website (it should pop up in your browser)
 
